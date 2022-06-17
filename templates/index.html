@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title> Games</title>
+  </head>
+<body>
+  <h1> Welcome to Bowling Exercise</h1>
+  <H2>Add new game here:</H2>
+     <form action="/api/games/create" method="POST">
+        <p>Name: <input type="text" name="name" placeholder="Add Game Name...">
+         <button type="submit">Add</button></p>
+     </form>
+     <br><a href="/api/games/frames"> Frames</a>
+  <h2> Game List:</h2>
+     <table border="1">
+         <tr>
+           <th>Game id</th>
+           <th>Game Name</th>
+           <th>Edit Game</th>
+         </tr>
+          {% for game in games %}
+         <tr>
+         <td>{{game.id}}</td>
+         <td>{{game.name}} </td>
+         <td>
+           <form action="/api/games/update/{{ game.id }}" method="POST">
+                  <p><input type="text" name="name" placeholder="put new name here"/>   <button type="submit">Update</button></p>
+           </form>
+           <form action="/api/games/delete/{{ game.id }}" method="GET","POST">
+                 <button type="submit">delete</button>
+         </form>
+         </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+<br>
+
+
+</body>
+</html>

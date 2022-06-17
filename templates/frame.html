@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title> Frames</title>
+  </head>
+<body>
+  <h1> Welcome to Bowling Exercise</h1>
+  <H2>Add new Frames here:</H2>
+     <form action="/api/games/frames/create" method="POST">
+        <p>Frame Name: <input type="text" name="name" placeholder="Add Frame Name..."></p>
+        <p>Game ID: <input type="text" name="gameid" placeholder="Add Game ID ..."></p>
+        <p>Pins knoked down: <input type="text" name="pins_knocked_down" placeholder="Add pin_knocked_down..."></p>
+        <br>
+         <button type="submit">Add</button>
+     </form>
+     <br><a href="/api/games"> Games</a>
+  <h2> Frame List:</h2>
+     <table border="1">
+         <tr>
+           <th>Frame id</th>
+           <th>Frame Name</th>
+           <th>Game ID</th>
+           <th>Pins Knocked Down</th>
+           <th>Edit Frane</th>
+         </tr>
+          {% for frame in frames %}
+         <tr>
+         <td>{{frame.id}}</td>
+         <td>{{frame.name}} </td>
+         <td>{{frame.game_id}}</td>
+         <td>{{frame.pins_knocked_down}}</td>
+         <td>
+           <form action="/api/games/frames/update/{{frame.id}}" method="POST">
+                  <p><input type="text" name="name" placeholder="Put new name here..."/>
+                  <p><input type="text" name="pins_knocked_down" placeholder="Put Knocked down pins..."/> <button type="submit">Update</button></p>
+           </form>
+           <form action="/api/games/frames/delete/{{frame.id}}" method="GET","POST">
+                 <button type="submit">delete</button>
+         </form>
+         </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+<br>
+
+
+</body>
+</html>
